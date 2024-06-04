@@ -1,9 +1,10 @@
-import {Outlet} from "react-router-dom";
-import type {RouteObject} from 'react-router';
+import {createBrowserRouter, Outlet} from "react-router-dom";
 import PrivateRoute from "./privateRoute.tsx";
-import {Layout as DashboardLayout} from "../layouts/layout.tsx";
+import {DashboardLayout} from "../layouts/dashboardLayout.tsx";
+import GetStarted from "../pages/getStarted/getStarted.tsx";
+import {ErrorPage} from "../pages/errorPage.tsx";
 
-export const routes: RouteObject[] = [
+export const router = createBrowserRouter([
     {
         element: <PrivateRoute/>,
         children: [
@@ -17,11 +18,13 @@ export const routes: RouteObject[] = [
                 children: [
                     {
                         path: "/",
-                        element: <h1>ss</h1>
+                        element: <GetStarted/>,
                     },
                     {
-                        path: "/about",
-                        // element: <About/>
+                        path: "/invoice",
+                        element: <div>
+                            <div style={{background: "red"}}>Invoice</div>
+                        </div>
                     },
                     {
                         path: "/contact",
@@ -29,6 +32,7 @@ export const routes: RouteObject[] = [
                     }
                 ]
             }
-        ]
+        ],
+        errorElement: <ErrorPage/>,
     }
-]
+])
